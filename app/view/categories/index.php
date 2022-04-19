@@ -16,7 +16,9 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Edit</th>
-          <th scope="col">Delete</th>
+          <th scope="col">
+
+            Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +27,12 @@
             <th scope="row"><?= $category->categories_id ?></th>
             <td><?= $category->name ?></td>
             <td><button>Edit</button></td>
-            <td><button>Delete</button></td>
+            <td>
+              <form method="POST" action="<?=ROOT?>category/delete">
+                <input type="hidden" name="id" value="<?= $category->categories_id ?> ">
+                <button class="btn btn-danger" type="submit" name="deleteCat">Delete</button>
+              </form>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>

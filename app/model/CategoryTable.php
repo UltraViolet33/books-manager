@@ -1,8 +1,14 @@
 <?php
-require_once('../app/core/Database.php');
 
-class CategoryTable
+require_once('../app/core/Database.php');
+require_once('../app/model/Table.php');
+
+class CategoryTable extends Table
 {
+
+    protected $table = "categories";
+    protected $id = "categories_id";
+
 
     /**
      * insert 
@@ -13,7 +19,7 @@ class CategoryTable
     {
         $db = Database::getInstance();
         $query = "INSERT INTO categories (name) VALUES (:name)";
-        return $db->write($query, ['name'=>$name]);
+        return $db->write($query, ['name' => $name]);
     }
 
     /**
@@ -25,5 +31,14 @@ class CategoryTable
     {
         $db = Database::getInstance();
         return  $db->read("SELECT * FROM categories");
+    }
+
+    /**
+     * delete a category in the BDD
+     * @param int $id
+     */
+    public function deleteCategory($id)
+    {
+        $this->delete($id);
     }
 }
