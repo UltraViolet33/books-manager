@@ -89,7 +89,6 @@ class Category extends Controller
                 $_SESSION['error'] = "Name input must be filled <br>";
             }
         }
-        
         $id = (int)$id;
         $category = $this->model->selectCategory($id);
         $data['category'] = $category;

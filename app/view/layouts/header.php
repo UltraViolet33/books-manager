@@ -29,7 +29,7 @@
                         </ul>
                     </div>
                     <li class="nav-item">
-                        <a href="<?= ROOT ?>category" class="nav-link text-white">Add Books</a>
+                        <a href="<?= ROOT ?>book/add" class="nav-link text-white">Add Books</a>
                     </li>
                 </ul>
             </div>
