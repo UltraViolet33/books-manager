@@ -2,11 +2,15 @@
 
 require_once('../app/core/controller.php');
 
-class Home
+class Home extends Controller
 {
-    
+
+    /**
+     * index
+     * display home view
+     */
     public function index()
     {
-        echo "This is index page";
+        $this->view('index');
     }
 }

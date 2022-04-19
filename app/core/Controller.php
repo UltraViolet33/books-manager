@@ -14,7 +14,6 @@ class Controller
         if (file_exists("../app/view/" . $path . ".php")) {
             include "../app/view/" . $path . ".php";
         } else {
-            echo "tes";
             die;
             include "../app/view/404.php";
         }

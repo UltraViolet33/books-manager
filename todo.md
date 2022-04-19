@@ -1,16 +1,14 @@
 # user stories
-## User
-1. Create an account
-1. Log in
-1. Log out
-1. Update profil data
-1. Delete account
+
+## categories
+CRUD
 
 ## Books
 1. Create a book
 1. Display books
 1. Update a book
 1. Delete a book
+
 
 
 ## To come
@@ -21,28 +19,18 @@
 1. units tests
 
 
-
 ## steps :
-1. User
-    1. Create the BDD (SQL)
-    1. Create the project MVC
-    1. User model
-    1. Create a user
-    1. Log in
-    1. Log out
-    1. Update user profil
-    1. Delete account User
+## morning
 
 1. Categories
+    1.create cat
+    1.read cats
+    1.update cat (disabled) 
+    1.Paginate categories 
 
-
-
+## afternoon
 1. Books
-    1. Books Model
     1. Create a book
     1. Display Books
     1. Update a book
     1. Delete a book
-
-
-

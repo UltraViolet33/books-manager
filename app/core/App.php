@@ -22,10 +22,8 @@ class App
         } else {
             $this->controller = "Page404";
         }
-        
+
         require("../app/controller/" . $this->controller . ".php");
-        var_dump($this->controller);
-        echo $this->controller;
         $this->controller = new $this->controller;
 
         if (isset($url[1])) {
