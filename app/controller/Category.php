@@ -46,6 +46,10 @@ class Category extends Controller
         $this->view("categories/add");
     }
 
+    /**
+     * delete
+     * delete a category in the BDD
+     */
     public function delete()
     {
         if (isset($_POST['deleteCat'])) {
@@ -61,5 +65,35 @@ class Category extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * edit
+     * edit a category in the BDD
+     * @param int $id
+     */
+    public function edit($id)
+    {
+        if (!is_numeric($id) || $id == 0) {
+            header("Location: " . ROOT . "category");
+            return;
+        }
+
+        if (isset($_POST['editCat'])) {
+            if (!empty($_POST['name'])) {
+                $name = validateData($_POST['name']);
+                $this->model->updateCategory($id, $name);
+                header("Location: " . ROOT . "category");
+                return;
+            } else {
+                $_SESSION['error'] = "Name input must be filled <br>";
+            }
+        }
+        
+        $id = (int)$id;
+        $category = $this->model->selectCategory($id);
+        $data['category'] = $category;
+        extract($data);
+        $this->view("categories/edit", $data);
     }
 }

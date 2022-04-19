@@ -16,9 +16,7 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Edit</th>
-          <th scope="col">
-
-            Delete</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -26,9 +24,9 @@
           <tr>
             <th scope="row"><?= $category->categories_id ?></th>
             <td><?= $category->name ?></td>
-            <td><button>Edit</button></td>
+            <td><a href="<?= ROOT ?>category/edit/<?= $category->categories_id ?>" class="btn btn-primary">Edit</a></td>
             <td>
-              <form method="POST" action="<?=ROOT?>category/delete">
+              <form method="POST" action="<?= ROOT ?>category/delete">
                 <input type="hidden" name="id" value="<?= $category->categories_id ?> ">
                 <button class="btn btn-danger" type="submit" name="deleteCat">Delete</button>
               </form>

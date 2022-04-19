@@ -9,7 +9,6 @@ class CategoryTable extends Table
     protected $table = "categories";
     protected $id = "categories_id";
 
-
     /**
      * insert 
      * @param string name
@@ -40,5 +39,28 @@ class CategoryTable extends Table
     public function deleteCategory($id)
     {
         $this->delete($id);
+    }
+
+    /**
+     * select one category in the BDD from its ID
+     * @param int $id
+     * @return array
+     */
+    public function selectCategory($id)
+    {
+        return $this->selectOneItem($id);
+    }
+
+    /**
+     * updateCategory
+     * @param int $id
+     * @param string $name
+     */
+    public function updateCategory($id, $name)
+    {
+        $query = "UPDATE categories SET name = :name WHERE $this->id = :id";
+        $data['id'] = $id;
+        $data['name'] = $name;
+        $check =  $this->db->write($query, $data);
     }
 }
