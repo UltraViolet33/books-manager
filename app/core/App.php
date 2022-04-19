@@ -2,7 +2,7 @@
 
 class App
 {
-    protected $controller = "home";
+    protected $controller = "Book";
     protected $method = "index";
     protected $params;
 
@@ -34,7 +34,7 @@ class App
             }
         }
 
-        $this->params = (count($url) > 0) ? $url : ["home"];
+        $this->params = (count($url) > 0) ? $url : ["Book"];
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
@@ -44,7 +44,7 @@ class App
      */
     private function parseURL()
     {
-        $url = isset($_GET['url']) ? $_GET['url'] : "home";
+        $url = isset($_GET['url']) ? $_GET['url'] : "Book";
         return explode("/", filter_var(trim($url, "/"), FILTER_SANITIZE_URL));
     }
 }

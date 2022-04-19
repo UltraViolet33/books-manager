@@ -13,6 +13,18 @@ class Book extends Controller
     }
 
     /**
+     * index
+     * display category view
+     */
+    public function index()
+    {
+        $books = $this->model->getAll();
+        $data['books'] = $books;
+        extract($data);
+        $this->view('index', $data);
+    }
+
+    /**
      * add
      * add a book in the BDD
      */
@@ -22,7 +34,8 @@ class Book extends Controller
             if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['category_id']) && is_numeric($_POST['category_id'])) {
                 $title = validateData($_POST['title']);
                 $author = validateData($_POST['author']);
-                if ($this->model->insert($title, $author)) {
+                $id = validateData($_POST['category_id']);
+                if ($this->model->insert($title, $author, $id)) {
                     header("Location: " . ROOT . "home");
                     return;
                 }

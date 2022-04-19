@@ -14,24 +14,36 @@ class BookTable extends Table
      * @param string name
      * @return bool
      */
-    public function insert($title, $author)
+    public function insert($title, $author, $categoryId)
     {
         $query = "INSERT INTO $this->table (title, author) VALUES (:title, :author)";
         $data['title'] = $title;
         $data['author'] = $author;
-        return $this->db->write($query, $data);
+        $this->db->write($query, $data);
+        $data = [];
+
+        $idBook = $this->db->getLastInsertId();
+        $queryCategory = "INSERT INTO books_categories (books_id, categories_id) VALUES(:books_id, :categories_id)";
+        $data['books_id'] = $idBook;
+        $data['categories_id'] = $categoryId;
+        return $this->db->write($queryCategory, $data);
     }
 
     /**
      * getAll
-     * get al the categories from the BDD
+     * get al the books from the BDD
      * @return array
      */
-    // public function getAll()
-    // {
-    //     $db = Database::getInstance();
-    //     return  $db->read("SELECT * FROM categories");
-    // }
+    public function getAll()
+    {
+        $db = Database::getInstance();
+        $query = "SELECT * FROM books 
+        JOIN books_categories 
+        ON books.books_id = books_categories.books_id 
+        JOIN categories 
+        ON books_categories.categories_id = categories.categories_id";
+        return  $db->read($query);
+    }
 
     /**
      * delete a category in the BDD
