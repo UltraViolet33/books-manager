@@ -9,7 +9,9 @@ CREATE TABLE books (
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     isRead TINYINT(1) DEFAULT 0,
-    PRIMARY KEY (books_id)
+    books_cat_id INTEGER NOT NULL,
+    PRIMARY KEY (books_id),
+    FOREIGN KEY (books_cat_id) REFERENCES categories (categories_id)
 );
 
 CREATE TABLE books_categories(

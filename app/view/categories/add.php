@@ -8,7 +8,6 @@
         </div>
     </div>
 </div>
-
 <div class="row justify-content-center align-items-center">
     <div class="col-6">
         <form method="POST">

@@ -61,6 +61,6 @@ class CategoryTable extends Table
         $query = "UPDATE categories SET name = :name WHERE $this->id = :id";
         $data['id'] = $id;
         $data['name'] = $name;
-        $check =  $this->db->write($query, $data);
+        return $this->db->write($query, $data);
     }
 }

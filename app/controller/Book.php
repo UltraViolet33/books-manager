@@ -36,8 +36,7 @@ class Book extends Controller
                 $author = validateData($_POST['author']);
                 $id = validateData($_POST['category_id']);
                 if ($this->model->insert($title, $author, $id)) {
-                    
-                    header("Location: " . ROOT . "home");
+                    header("Location: " . ROOT . "book");
                     return;
                 }
             } else {
@@ -60,7 +59,7 @@ class Book extends Controller
     {
         if (isset($_POST['deleteBook'])) {
             if (!empty($_POST['id'])) {
-              
+
                 $id = (int)$_POST['id'];
                 if ($id === 0) {
                     header("Location: " . ROOT . "book");
@@ -79,27 +78,33 @@ class Book extends Controller
      * edit a category in the BDD
      * @param int $id
      */
-    // public function edit($id)
-    // {
-    //     if (!is_numeric($id) || $id == 0) {
-    //         header("Location: " . ROOT . "category");
-    //         return;
-    //     }
+    public function edit($id)
+    {
+        if (!is_numeric($id) || $id == 0) {
+            header("Location: " . ROOT . "book");
+            return;
+        }
 
-    //     if (isset($_POST['editCat'])) {
-    //         if (!empty($_POST['name'])) {
-    //             $name = validateData($_POST['name']);
-    //             $this->model->updateCategory($id, $name);
-    //             header("Location: " . ROOT . "category");
-    //             return;
-    //         } else {
-    //             $_SESSION['error'] = "Name input must be filled <br>";
-    //         }
-    //     }
-    //     $id = (int)$id;
-    //     $category = $this->model->selectCategory($id);
-    //     $data['category'] = $category;
-    //     extract($data);
-    //     $this->view("categories/edit", $data);
-    // }
+        if (isset($_POST['editBook'])) {
+            if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['category_id']) && is_numeric($_POST['category_id'])) {
+                $title = validateData($_POST['title']);
+                $author = validateData($_POST['author']);
+                $categoryId = validateData($_POST['category_id']);
+                $this->model->updateBook($id, $title, $author, $categoryId);
+                header("Location: " . ROOT . "book");
+                return;
+            } else {
+                $_SESSION['error'] = "Name input must be filled <br>";
+            }
+        }
+        $id = (int)$id;
+        $book = $this->model->selectBook($id);
+        $data['book'] = $book;
+
+        $categoryTable = $this->loadModel('CategoryTable');
+        $categories = $categoryTable->getAll();
+        $data['categories'] = $categories;
+        extract($data);
+        $this->view("books/edit", $data);
+    }
 }

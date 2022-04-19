@@ -3,7 +3,6 @@
 class Database
 {
   private $PDOInstance = null;
-
   private static $instance = null;
 
   private function __construct()

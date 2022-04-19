@@ -12,7 +12,7 @@
   <div class="col-12 col-md-8">
     <table class="table">
       <thead>
-        <tr>
+        <tr>              
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Edit</th>

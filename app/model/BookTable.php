@@ -16,17 +16,11 @@ class BookTable extends Table
      */
     public function insert($title, $author, $categoryId)
     {
-        $query = "INSERT INTO $this->table (title, author) VALUES (:title, :author)";
+        $query = "INSERT INTO $this->table (title, author, books_cat_id) VALUES (:title, :author, :categories_id)";
         $data['title'] = $title;
         $data['author'] = $author;
-        $this->db->write($query, $data);
-        $data = [];
-
-        $idBook = $this->db->getLastInsertId();
-        $queryCategory = "INSERT INTO books_categories (books_id, categories_id) VALUES(:books_id, :categories_id)";
-        $data['books_id'] = $idBook;
         $data['categories_id'] = $categoryId;
-        return $this->db->write($queryCategory, $data);
+        return  $this->db->write($query, $data);
     }
 
     /**
@@ -38,10 +32,8 @@ class BookTable extends Table
     {
         $db = Database::getInstance();
         $query = "SELECT * FROM books 
-        JOIN books_categories 
-        ON books.books_id = books_categories.books_id 
         JOIN categories 
-        ON books_categories.categories_id = categories.categories_id";
+        ON books.books_cat_id = categories.categories_id";
         return  $db->read($query);
     }
 
@@ -59,21 +51,25 @@ class BookTable extends Table
      * @param int $id
      * @return array
      */
-    // public function selectCategory($id)
-    // {
-    //     return $this->selectOneItem($id);
-    // }
+    public function selectBook($id)
+    {
+        $query = "SELECT * FROM books JOIN categories ON books.books_cat_id = categories.categories_id WHERE $this->id = :id";
+        $book =  $this->db->read($query, ['id' => $id]);
+        return $book[0];
+    }
 
     /**
      * updateCategory
      * @param int $id
      * @param string $name
      */
-    // public function updateCategory($id, $name)
-    // {
-    //     $query = "UPDATE categories SET name = :name WHERE $this->id = :id";
-    //     $data['id'] = $id;
-    //     $data['name'] = $name;
-    //     $check =  $this->db->write($query, $data);
-    // }
+    public function updateBook($id, $title, $author, $categoryId)
+    {
+        $query = "UPDATE books SET title = :title, author = :author, books_cat_id = :categories_id WHERE $this->id = :id";
+        $data['title'] = $title;
+        $data['id'] = $id;
+        $data['author'] = $author;
+        $data['categories_id'] = $categoryId;
+        return $this->db->write($query, $data);
+    }
 }

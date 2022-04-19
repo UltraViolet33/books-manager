@@ -19,7 +19,7 @@ class Table
      */
     protected function delete($id)
     {
-        $test = $this->db->write("DELETE FROM $this->table WHERE $this->id  = $id");
+        $this->db->write("DELETE FROM $this->table WHERE $this->id  = $id");
     }
 
     /**
