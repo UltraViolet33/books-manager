@@ -36,6 +36,7 @@ class Book extends Controller
                 $author = validateData($_POST['author']);
                 $id = validateData($_POST['category_id']);
                 if ($this->model->insert($title, $author, $id)) {
+                    
                     header("Location: " . ROOT . "home");
                     return;
                 }
@@ -53,24 +54,25 @@ class Book extends Controller
 
     /**
      * delete
-     * delete a category in the BDD
+     * delete a book in the BDD
      */
-    // public function delete()
-    // {
-    //     if (isset($_POST['deleteCat'])) {
-    //         if (!empty($_POST['id'])) {
-    //             $id = (int)$_POST['id'];
-    //             if ($id === 0) {
-    //                 header("Location: " . ROOT . "category");
-    //                 return;
-    //             } elseif (is_int($id) && $id !== 0) {
-    //                 $this->model->deleteCategory($id);
-    //                 header("Location: " . ROOT . "category");
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // }
+    public function delete()
+    {
+        if (isset($_POST['deleteBook'])) {
+            if (!empty($_POST['id'])) {
+              
+                $id = (int)$_POST['id'];
+                if ($id === 0) {
+                    header("Location: " . ROOT . "book");
+                    return;
+                } elseif (is_int($id) && $id !== 0) {
+                    $this->model->deleteBook($id);
+                    header("Location: " . ROOT . "book");
+                    return;
+                }
+            }
+        }
+    }
 
     /**
      * edit

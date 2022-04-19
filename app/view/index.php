@@ -29,8 +29,13 @@
                             <th scope="row"><?= $book->author ?></th>
                             <th scope="row"><?= $book->isRead ?></th>
                             <th scope="row"><?= $book->name ?></th>
-                            <th><button>Edit</button></th>
-                            <th><button>Delete</button></th>
+                            <td><a href="<?= ROOT ?>book/edit/<?= $book->books_id ?>" class="btn btn-primary">Edit</a></td>
+                            <th>
+                                <form method="POST" action="<?= ROOT ?>book/delete">
+                                    <input type="hidden" name="id" value="<?= $book->books_id ?> ">
+                                    <button class="btn btn-danger" type="submit" name="deleteBook">Delete</button>
+                                </form>
+                            </th>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

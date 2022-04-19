@@ -49,10 +49,10 @@ class BookTable extends Table
      * delete a category in the BDD
      * @param int $id
      */
-    // public function deleteCategory($id)
-    // {
-    //     $this->delete($id);
-    // }
+    public function deleteBook($id)
+    {
+        $this->delete($id);
+    }
 
     /**
      * select one category in the BDD from its ID
