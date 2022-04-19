@@ -15,4 +15,15 @@ class CategoryTable
         $query = "INSERT INTO categories (name) VALUES (:name)";
         return $db->write($query, ['name'=>$name]);
     }
+
+    /**
+     * getAll
+     * get al the categories from the BDD
+     * @return array
+     */
+    public function getAll()
+    {
+        $db = Database::getInstance();
+        return  $db->read("SELECT * FROM categories");
+    }
 }

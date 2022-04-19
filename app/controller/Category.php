@@ -11,7 +11,11 @@ class Category extends Controller
      */
     public function index()
     {
-        $this->view('categories/index');
+        $categoryTable = $this->loadModel("CategoryTable");
+        $categories = $categoryTable->getAll();
+        $data['categories'] = $categories;
+        extract($data);
+        $this->view('categories/index', $data);
     }
 
     /**
