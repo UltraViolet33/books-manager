@@ -18,9 +18,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="<?= ROOT ?>post" class="nav-link text-white">Categories</a>
-                    </li>
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle bg-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?= ROOT ?>category">All</a></li>
+                            <li><a class="dropdown-item" href="<?= ROOT ?>category/add">Add Category</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
                     <li class="nav-item">
                         <a href="<?= ROOT ?>category" class="nav-link text-white">Add Books</a>
                     </li>
