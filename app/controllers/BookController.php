@@ -2,14 +2,14 @@
 
 require_once('../app/core/controller.php');
 
-class Book extends Controller
+class BookController extends Controller
 {
 
     private $model;
 
     public function __construct()
     {
-        $this->model  = $this->loadModel("BookTable");
+        $this->model  = $this->loadModel("Book");
     }
 
     /**

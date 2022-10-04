@@ -2,14 +2,14 @@
 
 require_once('../app/core/controller.php');
 
-class Category extends Controller
+class CategoryController extends Controller
 {
 
     private $model;
 
     public function __construct()
     {
-        $this->model  = $this->loadModel("CategoryTable");
+        $this->model  = $this->loadModel("Category");
     }
 
     /**

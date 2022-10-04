@@ -1,9 +1,9 @@
 <?php
 
 require_once('../app/core/Database.php');
-require_once('../app/model/Table.php');
+require_once('../app/models/Table.php');
 
-class BookTable extends Table
+class Book extends Table
 {
 
     protected $table = "books";

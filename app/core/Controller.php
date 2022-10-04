@@ -13,10 +13,10 @@ class Controller
     {
         extract($data);
 
-        if (file_exists("../app/view/" . $path . ".php")) {
-            include "../app/view/" . $path . ".php";
+        if (file_exists("../app/views/" . $path . ".php")) {
+            include "../app/views/" . $path . ".php";
         } else {
-            include "../app/view/404.php";
+            include "../app/views/404.php";
         }
     }
 
@@ -29,8 +29,8 @@ class Controller
      */
     public function loadModel($model): object|bool
     {
-        if (file_exists("../app/model/" .  strtolower($model) . ".php")) {
-            include "../app/model/" . strtolower($model) . ".php";
+        if (file_exists("../app/models/" .  strtolower($model) . ".php")) {
+            include "../app/models/" . strtolower($model) . ".php";
             return $a = new $model();
         }
         return false;
