@@ -1,5 +1,12 @@
 <?php
 
+
+namespace App\core;
+
+use App\core\Config;
+
+use PDO;
+
 class Database
 {
 
@@ -8,8 +15,8 @@ class Database
 
   private function __construct()
   {
-    $string = DB_TYPE . ":host=" . DB_HOST . ";dbname=" . DB_NAME;
-    $this->PDOInstance  = new PDO($string, DB_USER, DB_PASS);
+    $string = Config::$dbType . ":host=" . Config::$dbHost . ";dbname=" . Config::$dbName;
+    $this->PDOInstance  = new PDO($string, Config::$dbUser, Config::$dbPassword);
   }
 
 

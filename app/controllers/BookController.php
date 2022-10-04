@@ -1,6 +1,11 @@
 <?php
 
-require_once('../app/core/controller.php');
+namespace App\controllers;
+
+use App\core\Controller;
+use App\models\Book;
+use App\models\Category;
+
 
 class BookController extends Controller
 {
@@ -9,7 +14,8 @@ class BookController extends Controller
 
     public function __construct()
     {
-        $this->model  = $this->loadModel("Book");
+        // $this->model  = $this->loadModel("Book");
+        $this->model = new Book();
     }
 
     /**
@@ -44,7 +50,8 @@ class BookController extends Controller
             }
         }
 
-        $categoryTable = $this->loadModel('CategoryTable');
+        // $categoryTable = $this->loadModel('CategoryTable');
+        $categoryTable = new Category();
         $categories = $categoryTable->getAll();
         $data['categories'] = $categories;
         extract($data);

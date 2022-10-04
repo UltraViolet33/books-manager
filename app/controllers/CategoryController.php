@@ -1,6 +1,10 @@
 <?php
 
-require_once('../app/core/controller.php');
+
+namespace App\controllers;
+
+use App\core\Controller;
+use App\models\Category;
 
 class CategoryController extends Controller
 {
@@ -9,7 +13,8 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->model  = $this->loadModel("Category");
+        // $this->model  = $this->loadModel("Category");
+        $this->model = new Category();
     }
 
     /**

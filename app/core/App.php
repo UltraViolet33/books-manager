@@ -1,6 +1,8 @@
 <?php
 
 
+namespace App\core;
+
 class App
 {
     protected $controller;
@@ -18,14 +20,21 @@ class App
 
         //check if the file exists
         if (file_exists("../app/controllers/" . strtolower($url[0]) . "Controller.php")) {
-            $this->controller = ($url[0])."Controller";
+
+            $this->controller = ($url[0]) . "Controller";
             unset($url[0]);
+
+            $fullController = "App" . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR . $this->controller;
+
+            if (class_exists($fullController)) {
+                $this->controller = new $fullController;
+            }
         } else {
             $this->controller = "Page404";
         }
 
-        require("../app/controllers/" . $this->controller . ".php");
-        $this->controller = new $this->controller;
+        // require("../app/controllers/" . $this->controller . ".php");
+
 
         if (isset($url[1])) {
             $url[1] = strtolower($url[1]);
