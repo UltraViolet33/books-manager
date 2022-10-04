@@ -9,6 +9,6 @@ $path = str_replace("index.php", "", $path);
 
 define("ROOT", $path);
 define("ASSETS", $path . "assets/");
-define("ROOT_PATH", "/BOOKS CRUD/");
+// define("ROOT_PATH", "/BOOKS CRUD/");
 
 $app = new App();

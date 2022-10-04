@@ -3,21 +3,23 @@
 /**
  * show
  * show the data in a readable format
+ * @param mixed data
  * @return void
  */
-function show($data)
+function show(mixed $data): void
 {
     echo "<pre>";
     print_r($data);
     echo "</pre>";
 }
 
+
 /**
  * checkError
  * check if there is an error and display it
  * @return void
  */
-function checkError()
+function checkError(): void
 {
     $msgError = "";
     if (isset($_SESSION['error']) && $_SESSION['error'] != "") {
@@ -28,6 +30,7 @@ function checkError()
     unset($_SESSION['error']);
     echo $msgError;
 }
+
 
 /**
  * validateData

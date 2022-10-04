@@ -1,8 +1,9 @@
 <?php
 
+
 class App
 {
-    protected $controller = "Book";
+    protected $controller;
     protected $method = "index";
     protected $params;
 
@@ -34,7 +35,7 @@ class App
             }
         }
 
-        $this->params = (count($url) > 0) ? $url : ["Book"];
+        $this->params = (count($url) > 0) ? $url : [];
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
@@ -42,7 +43,7 @@ class App
      * parseURL
      * @return array
      */
-    private function parseURL()
+    private function parseURL(): array
     {
         $url = isset($_GET['url']) ? $_GET['url'] : "Book";
         return explode("/", filter_var(trim($url, "/"), FILTER_SANITIZE_URL));
