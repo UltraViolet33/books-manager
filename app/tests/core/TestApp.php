@@ -49,7 +49,7 @@ class TestApp extends TestCase
         $_GET['url'] = "book/index";
         $url = ['book'];
         $result = $method->invokeArgs($app, [$url]);
-        $this->assertEquals($result, $bookController);
+        $this->assertEquals($bookController, $result);
 
         $property = $this->getPrivateProperty('App\core\App', 'controller');
         $result = $property->getValue($app);
@@ -67,9 +67,65 @@ class TestApp extends TestCase
         $result = $method->invokeArgs($app, [$url]);
         $this->assertEquals($page404, $result);
 
-        
+        $_GET['url'] = "movies";
+        $app = new App();
+        $property = $this->getPrivateProperty('App\core\App', 'controller');
+        $result = $property->getValue($app);
+        $this->assertEquals($page404, $result);
     }
 
+    public function testMethodsExists()
+    {
+        $_GET['url'] = "book/add";
+        $url = ['book', 'add'];
+        $app = new App();
+
+        $method = $this->getPrivateMethod('App\core\App', 'getMethod');
+        $result = $method->invokeArgs($app, [$url]);
+        $this->assertEquals("add", $result);
+
+        $property = $this->getPrivateProperty('App\core\App', 'method');
+        $result = $property->getValue($app);
+        $this->assertEquals("add", $result);
+    }
+
+
+    public function testIfMethodDoesntExist()
+    {
+        $_GET['url'] = "book";
+        $url = ['book'];
+        $app = new App();
+
+        $method = $this->getPrivateMethod('App\core\App', 'getMethod');
+        $result = $method->invokeArgs($app, [$url]);
+        $this->assertEquals("index", $result);
+
+        $property = $this->getPrivateProperty('App\core\App', 'method');
+        $result = $property->getValue($app);
+        $this->assertEquals("index", $result);
+    }
+
+    public function testParamsExists()
+    {
+        $_GET['url'] = "book/edit/4";
+        $app = new App();
+
+        $property = $this->getPrivateProperty('App\core\App', 'params');
+        $result = $property->getValue($app);
+        $params = ["4"];
+        $this->assertEquals($params, $result);
+    }
+
+    public function testParamsDoesntExist()
+    {
+        $_GET['url'] = "book/index";
+        $app = new App();
+
+        $property = $this->getPrivateProperty('App\core\App', 'params');
+        $result = $property->getValue($app);
+        $params = [];
+        $this->assertEquals($params, $result);
+    }
 
     /**
      * getPrivateMethod

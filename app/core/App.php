@@ -13,7 +13,6 @@ class App
     protected $params;
 
     const PATH_TO_CONTROLLERS = ROOT_PATH . "\app\controllers" . DIRECTORY_SEPARATOR;
-
     const NAMESPACE_CONTROLLERS = "App" . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR;
 
     /**
@@ -23,45 +22,14 @@ class App
      */
     public function __construct()
     {
-        // $_GET['url'] = "book/index";
         $url = $this->parseURL();
 
         $this->controller =  $this->getController($url);
-
         $this->method = $this->getMethod($url);
+        $this->params = (count($url) > 2) ? [$url[2]] : [];
+        
+        var_dump($this->controller);
 
-
-
-        // // //check if the file exists
-        // if (file_exists("C:\laragon\www\books-crud\app\controllers" . DIRECTORY_SEPARATOR . strtolower($url[0]) . "Controller.php")) {
-
-        //     // if (file_exists("../app/controllers/BookController.php")) {
-        //     //     echo "ok";
-
-        //     $this->controller = ($url[0]) . "Controller";
-        //     unset($url[0]);
-
-        //     $fullController = "App" . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR . $this->controller;
-
-        //     if (class_exists($fullController)) {
-        //         $this->controller = new $fullController;
-        //     }
-        // } else {
-        //     $this->controller = "Page404";
-        // }
-
-        // // require("../app/controllers/" . $this->controller . ".php");
-
-
-        // if (isset($url[1])) {
-        //     $url[1] = strtolower($url[1]);
-        //     if (method_exists($this->controller, $url[1])) {
-        //         $this->method = $url[1];
-        //         unset($url[1]);
-        //     }
-        // }
-
-        $this->params = (count($url) > 0) ? $url : [];
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
@@ -97,19 +65,23 @@ class App
 
 
 
-    private function getMethod($url)
+    private function getMethod(array $url): string
     {
+
         if (isset($url[1])) {
+            
             $url[1] = strtolower($url[1]);
             if (method_exists($this->controller, $url[1])) {
                 $method = $url[1];
+            
+            
                 unset($url[1]);
 
                 return $method;
             }
         }
-
         $method = "index";
+
         return $method;
     }
 }

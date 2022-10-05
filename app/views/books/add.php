@@ -29,7 +29,8 @@
             </div>
             <input type="submit" class="btn btn-primary" name="addBook" value="Confirm">
         </form>
-        <?= checkError() ?>
+        <?php
+        //  checkError() ?>
     </div>
 </div>
 <?php $this->view("layouts/footer", $data); ?>

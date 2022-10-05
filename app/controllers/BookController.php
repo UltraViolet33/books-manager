@@ -108,7 +108,8 @@ class BookController extends Controller
         $book = $this->model->selectBook($id);
         $data['book'] = $book;
 
-        $categoryTable = $this->loadModel('CategoryTable');
+        // $categoryTable = $this->loadModel('CategoryTable');
+        $categoryTable = new Category();
         $categories = $categoryTable->getAll();
         $data['categories'] = $categories;
         extract($data);
