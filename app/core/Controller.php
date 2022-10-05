@@ -15,9 +15,11 @@ class Controller
     public function view(string $path, array $data = [])
     {
         extract($data);
+        var_dump("C:\laragon\www\books-crud\app".DIRECTORY_SEPARATOR."views". DIRECTORY_SEPARATOR . $path . ".php");
 
-        if (file_exists("../app/views/" . $path . ".php")) {
-            include "../app/views/" . $path . ".php";
+        if (file_exists("C:\laragon\www\books-crud\app".DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR. $path . ".php")) {
+            var_dump('ok');
+            include "C:\laragon\www\books-crud\app".DIRECTORY_SEPARATOR."views". DIRECTORY_SEPARATOR . $path . ".php";
         } else {
             include "../app/views/404.php";
         }

@@ -9,6 +9,11 @@ require_once "../vendor/autoload.php";
 use App\core\App;
 
 $path = str_replace("index.php", "", $path);
+$rootPath = str_replace("public", "", __DIR__);
+// var_dump($test);
+define('ROOT_PATH', $rootPath);
+// var_dump(TEST);
+
 
 define("ROOT", $path);
 define("ASSETS", $path . "assets/");
