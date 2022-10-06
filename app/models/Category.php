@@ -1,9 +1,5 @@
 <?php
 
-// require_once('../app/core/Database.php');
-// require_once('../app/models/Table.php');
-
-
 namespace App\models;
 
 use App\models\Table;

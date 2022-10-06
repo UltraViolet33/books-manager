@@ -3,9 +3,21 @@
 
 namespace App\core;
 
-class Controller
+abstract class Controller
 {
     const VIEW_PATH  = ROOT_PATH . "app" . DIRECTORY_SEPARATOR . "views";
+
+
+    abstract public function index(): void; 
+
+    abstract public function add(): void;
+
+    abstract public function edit(int $id): void;
+
+    abstract public function delete(): void;
+
+   
+
     /**
      * view
      * load a view file

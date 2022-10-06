@@ -9,32 +9,33 @@ use App\models\Category;
 
 class BookController extends Controller
 {
-
     private $model;
 
     public function __construct()
     {
-        // $this->model  = $this->loadModel("Book");
         $this->model = new Book();
     }
+
 
     /**
      * index
      * display category view
+     * @return void
      */
-    public function index()
+    public function index(): void
     {
         $books = $this->model->getAll();
         $data['books'] = $books;
-        extract($data);
         $this->view('index', $data);
     }
+
 
     /**
      * add
      * add a book in the BDD
+     * @return void
      */
-    public function add()
+    public function add(): void
     {
         if (isset($_POST['addBook'])) {
             if (!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['category_id']) && is_numeric($_POST['category_id'])) {
@@ -50,23 +51,21 @@ class BookController extends Controller
             }
         }
 
-        // $categoryTable = $this->loadModel('CategoryTable');
         $categoryTable = new Category();
         $categories = $categoryTable->getAll();
         $data['categories'] = $categories;
-        extract($data);
         $this->view("books/add", $data);
     }
+
 
     /**
      * delete
      * delete a book in the BDD
      */
-    public function delete()
+    public function delete(): void
     {
         if (isset($_POST['deleteBook'])) {
             if (!empty($_POST['id'])) {
-
                 $id = (int)$_POST['id'];
                 if ($id === 0) {
                     header("Location: " . ROOT . "book");
@@ -80,12 +79,13 @@ class BookController extends Controller
         }
     }
 
+
     /**
      * edit
      * edit a category in the BDD
      * @param int $id
      */
-    public function edit($id)
+    public function edit(int $id): void
     {
         if (!is_numeric($id) || $id == 0) {
             header("Location: " . ROOT . "book");
@@ -104,15 +104,13 @@ class BookController extends Controller
                 $_SESSION['error'] = "Name input must be filled <br>";
             }
         }
+
         $id = (int)$id;
         $book = $this->model->selectBook($id);
         $data['book'] = $book;
-
-        // $categoryTable = $this->loadModel('CategoryTable');
         $categoryTable = new Category();
         $categories = $categoryTable->getAll();
         $data['categories'] = $categories;
-        extract($data);
         $this->view("books/edit", $data);
     }
 }

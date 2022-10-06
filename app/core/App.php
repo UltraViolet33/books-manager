@@ -62,7 +62,8 @@ class App
             }
         }
 
-        return new Page404();
+        // return new Page404();
+        // redirect on 404
     }
 
 

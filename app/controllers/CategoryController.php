@@ -13,7 +13,6 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        // $this->model  = $this->loadModel("Category");
         $this->model = new Category();
     }
 
@@ -21,12 +20,10 @@ class CategoryController extends Controller
      * index
      * display category view
      */
-    public function index()
+    public function index(): void
     {
-        // $categoryTable = $this->loadModel("CategoryTable");
         $categories = $this->model->getAll();
         $data['categories'] = $categories;
-        extract($data);
         $this->view('categories/index', $data);
     }
 
@@ -34,11 +31,10 @@ class CategoryController extends Controller
      * add
      * add a category in the BDD
      */
-    public function add()
+    public function add(): void
     {
         if (isset($_POST['addCat'])) {
             if (!empty($_POST['name'])) {
-                // $categoryTable = $this->loadModel("CategoryTable");
                 $name = validateData($_POST['name']);
                 if ($this->model->insert($name)) {
                     header("Location: " . ROOT . "category");
@@ -55,7 +51,7 @@ class CategoryController extends Controller
      * delete
      * delete a category in the BDD
      */
-    public function delete()
+    public function delete(): void
     {
         if (isset($_POST['deleteCat'])) {
             if (!empty($_POST['id'])) {
@@ -77,7 +73,7 @@ class CategoryController extends Controller
      * edit a category in the BDD
      * @param int $id
      */
-    public function edit($id)
+    public function edit(int $id): void
     {
         if (!is_numeric($id) || $id == 0) {
             header("Location: " . ROOT . "category");
