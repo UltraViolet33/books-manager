@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\core;
 
 use App\core\Controller;
@@ -8,9 +7,9 @@ use App\controllers\Page404;
 
 class App
 {
-    private $controller;
-    protected $method = "index";
-    protected $params;
+    private Controller $controller;
+    protected string $method = "index";
+    protected array $params;
 
     const PATH_TO_CONTROLLERS = ROOT_PATH . "\app\controllers" . DIRECTORY_SEPARATOR;
     const NAMESPACE_CONTROLLERS = "App" . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR;
@@ -27,8 +26,6 @@ class App
         $this->controller =  $this->getController($url);
         $this->method = $this->getMethod($url);
         $this->params = (count($url) > 2) ? [$url[2]] : [];
-        
-        var_dump($this->controller);
 
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
@@ -44,6 +41,12 @@ class App
     }
 
 
+    /**
+     * getController
+     *
+     * @param  array $url
+     * @return Controller
+     */
     private function getController(array $url): Controller
     {
 
@@ -59,29 +62,26 @@ class App
             }
         }
 
-        return  new Page404();
+        return new Page404();
     }
 
 
-
-
+    /**
+     * getMethod
+     *
+     * @param  array $url
+     * @return string
+     */
     private function getMethod(array $url): string
     {
-
         if (isset($url[1])) {
-            
+
             $url[1] = strtolower($url[1]);
             if (method_exists($this->controller, $url[1])) {
                 $method = $url[1];
-            
-            
-                unset($url[1]);
-
                 return $method;
             }
         }
-        $method = "index";
-
-        return $method;
+        return "index";
     }
 }

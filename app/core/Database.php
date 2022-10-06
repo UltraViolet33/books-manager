@@ -13,7 +13,7 @@ class Database
   private ?PDO $PDOInstance = null;
   private static ?self $instance = null;
 
-  private function __construct()
+  public function __construct()
   {
     $string = Config::$dbType . ":host=" . Config::$dbHost . ";dbname=" . Config::$dbName;
     $this->PDOInstance  = new PDO($string, Config::$dbUser, Config::$dbPassword);

@@ -11,8 +11,12 @@ use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
 
+use App\tests\TestsUtils;
+
 class TestApp extends TestCase
 {
+    use TestsUtils;
+
     public function testParseUrl()
     {
         define('ROOT', 'http://books-crud.test/');
@@ -134,14 +138,14 @@ class TestApp extends TestCase
      * @param  string $methodName
      * @return ReflectionMethod
      */
-    private function getPrivateMethod(string $className, string $methodName): ReflectionMethod
-    {
-        $reflector = new ReflectionClass($className);
-        $method = $reflector->getMethod($methodName);
-        $method->setAccessible(true);
+    // private function getPrivateMethod(string $className, string $methodName): ReflectionMethod
+    // {
+    //     $reflector = new ReflectionClass($className);
+    //     $method = $reflector->getMethod($methodName);
+    //     $method->setAccessible(true);
 
-        return $method;
-    }
+    //     return $method;
+    // }
 
 
     /**
@@ -151,12 +155,12 @@ class TestApp extends TestCase
      * @param  mixed $propertyName
      * @return ReflectionProperty
      */
-    private function getPrivateProperty(string $className, string $propertyName): ReflectionProperty
-    {
-        $reflector = new ReflectionClass($className);
-        $property = $reflector->getProperty($propertyName);
-        $property->setAccessible(true);
+    // private function getPrivateProperty(string $className, string $propertyName): ReflectionProperty
+    // {
+    //     $reflector = new ReflectionClass($className);
+    //     $property = $reflector->getProperty($propertyName);
+    //     $property->setAccessible(true);
 
-        return $property;
-    }
+    //     return $property;
+    // }
 }

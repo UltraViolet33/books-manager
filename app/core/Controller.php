@@ -5,6 +5,7 @@ namespace App\core;
 
 class Controller
 {
+    const VIEW_PATH  = ROOT_PATH . "app" . DIRECTORY_SEPARATOR . "views";
     /**
      * view
      * load a view file
@@ -15,13 +16,11 @@ class Controller
     public function view(string $path, array $data = [])
     {
         extract($data);
-        
 
-        if (file_exists("C:\laragon\www\books-crud\app".DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR. $path . ".php")) {
-          
-            include "C:\laragon\www\books-crud\app".DIRECTORY_SEPARATOR."views". DIRECTORY_SEPARATOR . $path . ".php";
+        if (file_exists(Controller::VIEW_PATH . DIRECTORY_SEPARATOR . $path . ".php")) {
+            include Controller::VIEW_PATH . DIRECTORY_SEPARATOR . $path . ".php";
         } else {
-            include "../app/views/404.php";
+            include Controller::VIEW_PATH . DIRECTORY_SEPARATOR . "404.php";
         }
     }
 
@@ -32,12 +31,12 @@ class Controller
      * @param string $model
      * @return object|bool
      */
-    public function loadModel($model): object|bool
-    {
-        if (file_exists("../app/models/" .  strtolower($model) . ".php")) {
-            include "../app/models/" . strtolower($model) . ".php";
-            return $a = new $model();
-        }
-        return false;
-    }
+    // public function loadModel($model): object|bool
+    // {
+    //     if (file_exists("../app/models/" .  strtolower($model) . ".php")) {
+    //         include "../app/models/" . strtolower($model) . ".php";
+    //         return $a = new $model();
+    //     }
+    //     return false;
+    // }
 }
