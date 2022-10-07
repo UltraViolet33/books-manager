@@ -1,4 +1,5 @@
-<?php $this->view("layouts/header", $data); ?>
+<?php
+$this->view("layouts/header", $data); ?>
 <div class="d-flex flex-column justify-content-center h-100">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -17,7 +18,7 @@
             </div>
             <input type="submit" class="btn btn-primary" name="addCat" value="Confirm">
         </form>
-        <?= checkError() ?>
+        <?= $this->checkError() ?>
     </div>
 </div>
 <?php $this->view("layouts/footer", $data); ?>

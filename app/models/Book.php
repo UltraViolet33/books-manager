@@ -32,11 +32,11 @@ class Book extends Table
      */
     public function getAll()
     {
-        $db = Database::getInstance();
+        // $db = Database::getInstance();
         $query = "SELECT * FROM books 
         JOIN categories 
         ON books.books_cat_id = categories.categories_id";
-        return  $db->read($query);
+        return  $this->db->read($query);
     }
 
     /**

@@ -5,20 +5,24 @@ namespace App\controllers;
 
 use App\core\Controller;
 use App\models\Category;
+use App\models\Table;
+use Valitron\Validator;
 
 class CategoryController extends Controller
 {
 
-    private $model;
+    
 
     public function __construct()
     {
         $this->model = new Category();
     }
 
+
     /**
      * index
      * display category view
+     * @return void
      */
     public function index(): void
     {
@@ -27,51 +31,62 @@ class CategoryController extends Controller
         $this->view('categories/index', $data);
     }
 
+
     /**
      * add
      * add a category in the BDD
+     * @return void
      */
     public function add(): void
     {
-        if (isset($_POST['addCat'])) {
-            if (!empty($_POST['name'])) {
-                $name = validateData($_POST['name']);
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+            $v = new Validator($_POST);
+            $v->rule('required', 'name');
+
+            if ($v->validate()) {
+                $name = $this->validateData($_POST['name']);
                 if ($this->model->insert($name)) {
                     header("Location: " . ROOT . "category");
                     return;
                 }
-            } else {
-                $_SESSION['error'] = "Name input must be filled <br>";
             }
+
+            $_SESSION['error'] = $v->errors();
         }
+
         $this->view("categories/add");
     }
+
 
     /**
      * delete
      * delete a category in the BDD
+     * @return void
      */
     public function delete(): void
     {
-        if (isset($_POST['deleteCat'])) {
-            if (!empty($_POST['id'])) {
-                $id = (int)$_POST['id'];
-                if ($id === 0) {
-                    header("Location: " . ROOT . "category");
-                    return;
-                } elseif (is_int($id) && $id !== 0) {
-                    $this->model->deleteCategory($id);
-                    header("Location: " . ROOT . "category");
-                    return;
-                }
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $v = new Validator($_POST);
+            $v->rule('required', 'id');
+            $v->rule('integer', 'id');
+
+            if ($v->validate()) {
+                $id = $_POST['id'];
+                $this->model->deleteCategory($id);
+                header("Location: " . ROOT . "category");
             }
+
+            header("Location: " . ROOT . "category");
         }
     }
+
 
     /**
      * edit
      * edit a category in the BDD
      * @param int $id
+     * @return void
      */
     public function edit(int $id): void
     {
@@ -80,20 +95,27 @@ class CategoryController extends Controller
             return;
         }
 
-        if (isset($_POST['editCat'])) {
-            if (!empty($_POST['name'])) {
-                $name = validateData($_POST['name']);
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $v = new Validator($_POST);
+            $v->rule('required', 'name');
+
+            if ($v->validate()) {
+                $name = $this->validateData($_POST['name']);
                 $this->model->updateCategory($id, $name);
                 header("Location: " . ROOT . "category");
                 return;
-            } else {
-                $_SESSION['error'] = "Name input must be filled <br>";
             }
+
+            $_SESSION['error'] = $v->errors();
         }
-        $id = (int)$id;
+
         $category = $this->model->selectCategory($id);
+
+        if (!$category) {
+            header("Location: " . ROOT . "category");
+        }
+
         $data['category'] = $category;
-        extract($data);
         $this->view("categories/edit", $data);
     }
 }

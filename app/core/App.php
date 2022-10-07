@@ -25,7 +25,7 @@ class App
 
         $this->controller =  $this->getController($url);
         $this->method = $this->getMethod($url);
-        $this->params = (count($url) > 2) ? [$url[2]] : [];
+        $this->params = (count($url) > 2) ? [(int)$url[2]] : [];
 
         call_user_func_array([$this->controller, $this->method], $this->params);
     }

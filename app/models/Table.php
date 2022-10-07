@@ -4,17 +4,18 @@
 namespace App\models;
 
 use App\core\Database;
+use App\models\interfaces\DatabaseInterface;
 
 class Table
 {
 
     protected $table;
     protected $id;
-    protected $db;
+    protected DatabaseInterface $db;
 
     public function __construct()
     {
-        $this->db = Database::getInstance();
+        $this->db = Database::connect();
     }
 
     /**
@@ -35,7 +36,7 @@ class Table
     protected function selectOneItem($id)
     {
         $query = "SELECT * FROM $this->table WHERE $this->id = :id";
-        $item = $this->db->read($query, ['id' => $id]);
-        return $item[0];
+        $item = $this->db->readOneRow($query, ['id' => $id]);
+        return $item;
     }
 }
