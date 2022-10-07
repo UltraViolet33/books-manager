@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\core;
 
 use App\core\Config;
 use App\models\interfaces\DatabaseInterface;
-
 use PDO;
 
 class Database implements DatabaseInterface
@@ -19,6 +17,7 @@ class Database implements DatabaseInterface
     $string = Config::$dbType . ":host=" . Config::$dbHost . ";dbname=" . Config::$dbName;
     $this->PDOInstance  = new PDO($string, Config::$dbUser, Config::$dbPassword);
   }
+
 
   public static function connect(): self
   {

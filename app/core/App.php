@@ -3,7 +3,6 @@
 namespace App\core;
 
 use App\core\Controller;
-use App\controllers\Page404;
 
 class App
 {
@@ -62,7 +61,6 @@ class App
             }
         }
 
-        // return new Page404();
         // redirect on 404
     }
 

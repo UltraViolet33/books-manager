@@ -21,16 +21,21 @@
             </div>
             <div class="mb-3">
                 <select class="form-select" name="category_id">
-                    <option selected>Select a categjjjory</option>
+                    <option selected>Select a category</option>
                     <?php foreach ($categories as $category) : ?>
                         <option value="<?= $category->categories_id ?>"><?= $category->name ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            <input type="submit" class="btn btn-primary" name="addBook" value="Confirm">
+            <div class="form-check mb-3">
+                <input name="status" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
+                <label for="status" class="form-check-label" for="flexCheckDefault">
+                    Read
+                </label>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Confirm">
         </form>
-        <?php
-        //  checkError() ?>
+        <?php $this->checkError() ?>
     </div>
 </div>
 <?php $this->view("layouts/footer", $data); ?>

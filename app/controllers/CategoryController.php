@@ -1,17 +1,13 @@
 <?php
 
-
 namespace App\controllers;
 
 use App\core\Controller;
 use App\models\Category;
-use App\models\Table;
 use Valitron\Validator;
 
 class CategoryController extends Controller
 {
-
-    
 
     public function __construct()
     {
