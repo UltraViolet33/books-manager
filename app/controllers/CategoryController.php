@@ -22,8 +22,7 @@ class CategoryController extends Controller
      */
     public function index(): void
     {
-        $categories = $this->model->getAll();
-        $data['categories'] = $categories;
+        $data['categories'] =  $this->model->getAll();
         $this->view('categories/index', $data);
     }
 

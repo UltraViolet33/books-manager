@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use App\core\Database;
-
 use App\tests\TestsUtils;
 
 class TestDatabase extends TestCase
@@ -15,6 +14,7 @@ class TestDatabase extends TestCase
         $instance = Database::getInstance();
         $this->assertEquals($db, $instance);
     }
+    
 
     public function testGetLastInsertId()
     {

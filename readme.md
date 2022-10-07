@@ -1,12 +1,12 @@
-# Books CRUD PHP
+# Books Manager PHP
 
 This is a sample web app in PHP.
 
 ## What can we do ?
-    Display books
-    Create a book
-    Update a book
-    delete a book
+    Display books / categories
+    Create a book / a category
+    Update a book / a category
+    delete a book / a category
 
 ## Technologies used :
     HTML5/CSS3
@@ -14,8 +14,4 @@ This is a sample web app in PHP.
     PHP
     SQL
 
-I used a MVC pattern that I made myself.
-No need a framework like Laravel of Symfony, this is just to practice CRUD operations with PHP and oriented-object programming.
-
-## To come :
-    A lot
+I used MVC pattern.

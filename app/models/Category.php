@@ -3,7 +3,6 @@
 namespace App\models;
 
 use App\models\Table;
-use App\core\Database;
 use stdClass;
 
 class Category extends Table
@@ -20,9 +19,8 @@ class Category extends Table
      */
     public function insert(string $name): bool
     {
-        $db = Database::getInstance();
         $query = "INSERT INTO categories (name) VALUES (:name)";
-        return $db->write($query, ['name' => $name]);
+        return $this->db->write($query, ['name' => $name]);
     }
 
 
@@ -33,8 +31,7 @@ class Category extends Table
      */
     public function getAll(): array
     {
-        $db = Database::getInstance();
-        return  $db->read("SELECT * FROM categories");
+        return $this->db->read("SELECT * FROM categories");
     }
 
 

@@ -7,6 +7,7 @@ use App\models\Table;
 abstract class Controller
 {
     const VIEW_PATH  = ROOT_PATH . "app" . DIRECTORY_SEPARATOR . "views";
+    
     protected Table $model;
     
     

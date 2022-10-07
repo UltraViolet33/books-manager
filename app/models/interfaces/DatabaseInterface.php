@@ -27,7 +27,7 @@ interface DatabaseInterface
      *
      * @param  string $query
      * @param  array $data
-     * @return array
+     * @return array|bool
      */
     public function read(string $query, array $data = []): array|bool;
 }

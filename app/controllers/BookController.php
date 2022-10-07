@@ -12,6 +12,7 @@ class BookController extends Controller
 {
     private Validator $v;
 
+
     public function __construct()
     {
         $this->model = new Book();
@@ -25,8 +26,7 @@ class BookController extends Controller
      */
     public function index(): void
     {
-        $books = $this->model->getAll();
-        $data['books'] = $books;
+        $data['books'] = $this->model->getAll();
         $this->view('index', $data);
     }
 
@@ -49,9 +49,7 @@ class BookController extends Controller
             $_SESSION["error"] = $this->v->errors();
         }
 
-        $categoryTable = new Category();
-        $categories = $categoryTable->getAll();
-        $data['categories'] = $categories;
+        $data['categories'] = (new Category())->getAll();
         $this->view("books/add", $data);
     }
 
@@ -108,11 +106,9 @@ class BookController extends Controller
             $_SESSION["error"] = $this->v->errors();
         }
 
-        $book = $this->model->selectBook($id);
-        $data['book'] = $book;
-        $categoryTable = new Category();
-        $categories = $categoryTable->getAll();
-        $data['categories'] = $categories;
+
+        $data['book'] = $this->model->selectBook($id);
+        $data['categories'] = (new Category())->getAll();
         $this->view("books/edit", $data);
     }
 

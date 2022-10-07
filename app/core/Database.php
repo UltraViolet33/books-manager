@@ -59,7 +59,7 @@ class Database implements DatabaseInterface
         return $data;
       }
     }
-    return false;
+    return [];
   }
 
 

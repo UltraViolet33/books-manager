@@ -12,7 +12,7 @@
 <body class="d-flex flex-column min-vh-100 ">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container-fluid ">
-            <a href="home" class="navbar-brand text-white">Books</a>
+            <a href="/" class="navbar-brand text-white">Books</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,7 +25,6 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?= ROOT ?>category">All</a></li>
                             <li><a class="dropdown-item" href="<?= ROOT ?>category/add">Add Category</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </div>
                     <li class="nav-item">

@@ -1,16 +1,11 @@
 <?php
 
-
 namespace App\tests\core;
 
 use PHPUnit\Framework\TestCase;
 use App\core\App;
 use App\controllers\BookController;
 use App\controllers\Page404;
-use ReflectionClass;
-use ReflectionMethod;
-use ReflectionProperty;
-
 use App\tests\TestsUtils;
 
 class TestApp extends TestCase
@@ -42,6 +37,7 @@ class TestApp extends TestCase
         $this->assertSame($result, ["book"]);
     }
 
+
     public function testControllerExists()
     {
         $app = new App();
@@ -57,7 +53,6 @@ class TestApp extends TestCase
 
         $property = $this->getPrivateProperty('App\core\App', 'controller');
         $result = $property->getValue($app);
-
         $this->assertEquals($bookController, $result);
     }
 
@@ -77,6 +72,7 @@ class TestApp extends TestCase
         $result = $property->getValue($app);
         $this->assertEquals($page404, $result);
     }
+
 
     public function testMethodsExists()
     {
@@ -109,6 +105,7 @@ class TestApp extends TestCase
         $this->assertEquals("index", $result);
     }
 
+
     public function testParamsExists()
     {
         $_GET['url'] = "book/edit/4";
@@ -119,6 +116,7 @@ class TestApp extends TestCase
         $params = ["4"];
         $this->assertEquals($params, $result);
     }
+    
 
     public function testParamsDoesntExist()
     {
