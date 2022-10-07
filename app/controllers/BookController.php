@@ -9,7 +9,7 @@ use App\models\Category;
 
 class BookController extends Controller
 {
-    private $model;
+    // private $model;
 
     public function __construct()
     {

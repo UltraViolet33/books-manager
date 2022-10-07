@@ -8,8 +8,8 @@ use App\core\Database;
 class Book extends Table
 {
 
-    protected $table = "books";
-    protected $id = "books_id";
+    protected string $table = "books";
+    protected string $id = "books_id";
 
     /**
      * insert 
