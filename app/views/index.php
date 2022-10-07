@@ -27,7 +27,7 @@
                             <th scope="row"><?= $book->books_id ?></th>
                             <th scope="row"><?= $book->title ?></th>
                             <th scope="row"><?= $book->author ?></th>
-                            <th scope="row"><?= $book->isRead ?></th>
+                            <th scope="row"><?= $book->status ?></th>
                             <th scope="row"><?= $book->name ?></th>
                             <td><a href="<?= ROOT ?>book/edit/<?= $book->books_id ?>" class="btn btn-primary">Edit</a></td>
                             <th>

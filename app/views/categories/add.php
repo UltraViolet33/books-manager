@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h1 class="text-center">
-                Edit a category
+                Add a category
             </h1>
         </div>
     </div>
@@ -13,11 +13,11 @@
         <form method="POST">
             <div class="mb-3">
                 <label for="nale" class="form-label">Name : *</label>
-                <input type="text" value="<?= validateData($category->name) ?>" name='name' class="form-control">
+                <input type="text" value="" name='name' class="form-control">
             </div>
-            <input type="submit" class="btn btn-primary" name="editCat" value="Confirm">
+            <input type="submit" class="btn btn-primary" name="addCat" value="Confirm">
         </form>
-        <?= checkError() ?>
+        <?= $this->checkError() ?>
     </div>
 </div>
 <?php $this->view("layouts/footer", $data); ?>
