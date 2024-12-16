@@ -14,24 +14,12 @@ class CategoryController extends Controller
         $this->model = new Category();
     }
 
-
-    /**
-     * index
-     * display category view
-     * @return void
-     */
     public function index(): void
     {
         $data['categories'] =  $this->model->getAll();
         $this->view('categories/index', $data);
     }
 
-
-    /**
-     * add
-     * add a category in the BDD
-     * @return void
-     */
     public function add(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -53,12 +41,6 @@ class CategoryController extends Controller
         $this->view("categories/add");
     }
 
-
-    /**
-     * delete
-     * delete a category in the BDD
-     * @return void
-     */
     public function delete(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -76,13 +58,6 @@ class CategoryController extends Controller
         }
     }
 
-
-    /**
-     * edit
-     * edit a category in the BDD
-     * @param int $id
-     * @return void
-     */
     public function edit(int $id): void
     {
         if (!is_numeric($id) || $id == 0) {

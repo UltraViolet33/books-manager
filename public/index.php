@@ -4,6 +4,7 @@ session_start();
 $path = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 
 require_once "../vendor/autoload.php";
+
 use App\core\App;
 
 $path = str_replace("index.php", "", $path);

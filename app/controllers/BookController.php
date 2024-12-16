@@ -12,30 +12,17 @@ class BookController extends Controller
 {
     private Validator $v;
 
-
     public function __construct()
     {
         $this->model = new Book();
     }
 
-
-    /**
-     * index
-     * display category view
-     * @return void
-     */
     public function index(): void
     {
         $data['books'] = $this->model->getAll();
         $this->view('index', $data);
     }
 
-
-    /**
-     * add
-     * add a book in the BDD
-     * @return void
-     */
     public function add(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -53,12 +40,6 @@ class BookController extends Controller
         $this->view("books/add", $data);
     }
 
-
-    /**
-     * delete
-     * delete a book in the BDD
-     * @return void
-     */
     public function delete(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -77,14 +58,6 @@ class BookController extends Controller
         }
     }
 
-
-
-    /**
-     * edit
-     * edit a category in the BDD
-     * @param int $id
-     * @return void
-     */
     public function edit(int $id): void
     {
         if (!is_numeric($id) || $id == 0) {
@@ -112,13 +85,6 @@ class BookController extends Controller
         $this->view("books/edit", $data);
     }
 
-
-    /**
-     * validateBookData
-     *
-     * @param  array $data
-     * @return bool
-     */
     private function validateBookData(array $data): bool
     {
         $this->v = new Validator($data);
@@ -128,13 +94,6 @@ class BookController extends Controller
         return $this->v->validate();;
     }
 
-
-    /**
-     * cleanDataForm
-     *
-     * @param  array $data
-     * @return array
-     */
     private function cleanDataForm(array $data): array
     {
         $cleanData = [];

@@ -5,6 +5,7 @@ namespace App\core;
 use App\core\Config;
 use App\models\interfaces\DatabaseInterface;
 use PDO;
+use PDOException;
 
 class Database implements DatabaseInterface
 {
@@ -15,9 +16,13 @@ class Database implements DatabaseInterface
   public function __construct()
   {
     $string = Config::$dbType . ":host=" . Config::$dbHost . ";dbname=" . Config::$dbName;
-    $this->PDOInstance  = new PDO($string, Config::$dbUser, Config::$dbPassword);
+    try {
+      $this->PDOInstance  = new PDO($string, Config::$dbUser, Config::$dbPassword);
+    } catch (PDOException $e) {
+      echo "Une erreur est survenue";
+      die;
+    }
   }
-
 
   public static function connect(): self
   {
@@ -27,11 +32,6 @@ class Database implements DatabaseInterface
     return self::$instance;
   }
 
-
-  /**
-   * return Database instance 
-   * @return self $instance
-   */
   public static function getInstance(): self
   {
     if (is_null(self::$instance)) {
@@ -41,13 +41,6 @@ class Database implements DatabaseInterface
   }
 
 
-  /**
-   * read
-   * read on the BDD
-   * @param string $query
-   * @param array $data
-   * @return array|bool
-   */
   public function read(string $query, array $data = array()): array|bool
   {
     $statement = $this->PDOInstance->prepare($query);
@@ -62,14 +55,6 @@ class Database implements DatabaseInterface
     return [];
   }
 
-
-  /**
-   * readOneRow
-   * read one row on the DB
-   * @param  string $query
-   * @param  array $data
-   * @return object|bool
-   */
   public function readOneRow(string $query, array $data = array()): object|bool
   {
     $statement = $this->PDOInstance->prepare($query);
@@ -84,26 +69,12 @@ class Database implements DatabaseInterface
     return false;
   }
 
-
-  /**
-   * write
-   * write on the BDD
-   * @param string $query
-   * @param array $data
-   * @return bool
-   */
   public function write(string $query, array $data = array()): bool
   {
     $statement = $this->PDOInstance->prepare($query);
     return $statement->execute($data);
   }
 
-
-  /**
-   * getLastInsertId
-   * return the last id inserted
-   * @return int
-   */
   public function getLastInsertId(): int
   {
     return $this->PDOInstance->lastInsertId();
